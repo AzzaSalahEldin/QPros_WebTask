@@ -1,10 +1,10 @@
-<suite name="ParallelSuite" parallel="tests" thread-count="2">
+<suite name="ParallelSuite" parallel="instances" thread-count="2">
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
     <configuration>
         <systemPropertyVariables>
-            <allure.results.directory>target/allure-results</allure.results.directory>
+            <allure.results.directory>allure-results</allure.results.directory>
         </systemPropertyVariables>
     </configuration>
     <test name="ChromeTests">
@@ -13,10 +13,10 @@
             <class name="tests.shoppingTests"/>
         </classes>
     </test>
-<!--    <test name="FirefoxTests">-->
-<!--        <parameter name="browser" value="firefox"/>-->
-<!--        <classes>-->
-<!--            <class name="tests.shoppingTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="FirefoxTests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="tests.shoppingTests"/>
+        </classes>
+    </test>
 </suite>

@@ -13,16 +13,14 @@ public class DriverManager {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver initDriver() {
-        String browser = ConfigReader.getBrowser(); // e.g., "chrome" or "firefox"
-        String runMode = ConfigReader.getRunMode(); // e.g., "local" or "grid"
-
+        String browser = ConfigReader.getBrowser();
+        String runMode = ConfigReader.getRunMode();
         try {
             switch (browser.toLowerCase()) {
                 case "chrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
                     if (ConfigReader.isHeadless()) chromeOptions.addArguments("--headless=new");
                     chromeOptions.addArguments("--remote-allow-origins=*");
-
                     if (runMode.equalsIgnoreCase("grid")) {
                         driver.set(new RemoteWebDriver(new URL(ConfigReader.getGridUrl()), chromeOptions));
                     } else {
@@ -34,7 +32,6 @@ public class DriverManager {
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     if (ConfigReader.isHeadless()) firefoxOptions.addArguments("--headless");
-
                     if (runMode.equalsIgnoreCase("grid")) {
                         driver.set(new RemoteWebDriver(new URL(ConfigReader.getGridUrl()), firefoxOptions));
                     } else {
@@ -42,19 +39,15 @@ public class DriverManager {
                         driver.set(new org.openqa.selenium.firefox.FirefoxDriver(firefoxOptions));
                     }
                     break;
-
                 default:
                     throw new RuntimeException("Unsupported browser: " + browser);
             }
-
             getDriver().manage().window().maximize();
             getDriver().get(ConfigReader.getBaseUrl());
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to initialize driver: " + e.getMessage());
         }
-
         return driver.get();
     }
 

@@ -16,6 +16,7 @@ import utils.DriverManager;
 
 @Feature("Login Feature")
 public class shoppingTests extends BaseTest {
+
     private HomePage homePage;
     private BasketPage basketPage;
     private CheckOutPage checkoutPage;
@@ -26,26 +27,30 @@ public class shoppingTests extends BaseTest {
         basketPage = new BasketPage(DriverManager.getDriver());
         checkoutPage = new CheckOutPage(DriverManager.getDriver());
     }
-
-
     @Test(priority = 1)
-    @Description("Verify login with valid credentials")
+    @Description("Verify book exist with its price")
     @Severity(SeverityLevel.CRITICAL)
     @Parameters("browser")
     public void verifyBookExistsWithPrice() {
         Assert.assertTrue(homePage.isBookDisplayed("Thinking in HTML"), "Book should be visible");
         Assert.assertEquals(homePage.getBookPrice("Thinking in HTML"), "₹400.00");
     }
-//    @Test(priority = 2)
-//    public void validateItemsAddedToCart(){
-//        homePage.clickAddToBasket("Thinking in HTML");
-//        homePage.viewBasket();
-//        Assert.assertTrue(basketPage.isOnCartPage());
-//        Assert.assertTrue(basketPage.isBookInCart("Thinking in HTML"));
-//        Assert.assertTrue(basketPage.verifyBookPrice("Thinking in HTML"));
-//        Assert.assertEquals(basketPage.getBookQuantity("Thinking in HTML"), 1);
-//    }
+    @Test(priority = 2)
+    @Description("Verify item added to cart")
+    @Severity(SeverityLevel.CRITICAL)
+    @Parameters("browser")
+    public void validateItemsAddedToCart(){
+        homePage.clickAddToBasket("Thinking in HTML");
+        homePage.viewBasket();
+        Assert.assertTrue(basketPage.isOnCartPage());
+        Assert.assertTrue(basketPage.isBookInCart("Thinking in HTML"));
+        Assert.assertTrue(basketPage.verifyBookPrice("Thinking in HTML"));
+        Assert.assertEquals(basketPage.getBookQuantity("Thinking in HTML"), 1);
+    }
 //    @Test(priority = 3)
+//    @Description("Verify proceed to checkout")
+//    @Severity(SeverityLevel.CRITICAL)
+//    @Parameters("browser")
 //    public void validateProceedToCheckout(){
 //        homePage.clickAddToBasket("Thinking in HTML");
 //        homePage.viewBasket();
@@ -54,43 +59,49 @@ public class shoppingTests extends BaseTest {
 //    }
 //
 //    @Test(priority = 4)
+//    @Description("Verify billing form not visible without adding books")
+//    @Severity(SeverityLevel.CRITICAL)
+//    @Parameters("browser")
 //    public void validateBillingFormNotVisibleWithoutAddingBook() {
 //        homePage.goToCart();
 //        try {
-//            Assert.assertFalse(checkoutPage.isBillingDetailsFormDisplayed(), "Billing form should not be visible without items.");
+//            Assert.assertFalse(checkoutPage.isFieldDisplayed("billing_first_name"), "Billing form should not be visible without items.");
 //        } catch (Exception e) {
 //            Assert.assertTrue(e.getMessage().contains("no such element"), "Expected navigation to fail or billing form to be absent.");
 //        }
 //    }
 //    @Test(priority = 5)
+//    @Description("Verify billing details")
+//    @Severity(SeverityLevel.CRITICAL)
+//    @Parameters("browser")
 //    public void validateBillingDetails(){
 //        homePage.clickAddToBasket("Thinking in HTML");
 //        homePage.viewBasket();
 //        basketPage.clickProceedToCheckout();
-//
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_first_name"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_last_name"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_company"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_email"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_phone"));
-////        Assert.assertTrue(checkoutPage.isCountryDropdownDisplayed(), "Country dropdown is not visible");
+//        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_country_field"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_address_1"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_address_2"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_city"));
-////        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_state"));
+//        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_state_field"));
 //        Assert.assertTrue(checkoutPage.isFieldDisplayed("billing_postcode"));
-//
 //    }
 //    @Test(priority = 6)
+//    @Description("Verify order details for Thinking In HTML book")
+//    @Severity(SeverityLevel.CRITICAL)
+//    @Parameters("browser")
 //    public void validateOrderDetailsForThinkingInHTML() {
 //        homePage.clickAddToBasket("Thinking in HTML");
 //        homePage.viewBasket();
 //        basketPage.clickProceedToCheckout();
-//
 //        Assert.assertTrue(checkoutPage.isOrderTableDisplayed(), "Order table is not visible");
-////        Assert.assertTrue(checkoutPage.getOrderItemText().contains("Thinking in HTML"), "Incorrect product row in order table");
+//        Assert.assertTrue(checkoutPage.getOrderItemText().contains("Thinking in HTML"), "Incorrect product row in order table");
 //        Assert.assertEquals(checkoutPage.getSubtotalText(), "₹400.00", "Subtotal is incorrect");
-////        Assert.assertEquals(checkoutPage.getShippingText(), "₹8.00", "Shipping info is incorrect");
+//        Assert.assertEquals(checkoutPage.getTaxText(), "₹8.00", "Shipping info is incorrect");
 //        Assert.assertEquals(checkoutPage.getTotalText(), "₹408.00", "Total is incorrect");
 //    }
 }

@@ -4,10 +4,8 @@ import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class CheckOutPage extends BasePage {
-    private By billingFirstNameInput = By.id("billing_first_name");
 
     public CheckOutPage(WebDriver driver) {
         super(driver);
@@ -31,26 +29,18 @@ public class CheckOutPage extends BasePage {
         }
     }
     public String getOrderItemText() {
-        return getText(By.cssSelector(".product-name"));
+        return getText(By.cssSelector("td.product-name"));
     }
 
     public String getSubtotalText() {
         return getText(By.cssSelector(".cart-subtotal td"));
     }
 
-    public String getShippingText() {
-        return getText(By.cssSelector(".shipping td"));
+    public String getTaxText() {
+        return getText(By.cssSelector(".tax-rate.tax-rate-in-tax-1 td"));
     }
 
     public String getTotalText() {
         return getText(By.cssSelector(".order-total td"));
-    }
-    public boolean isCountryDropdownDisplayed() {
-        try {
-            WebElement countryDropdown = driver.findElement(By.cssSelector("billing_country"));
-            return countryDropdown.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 }
