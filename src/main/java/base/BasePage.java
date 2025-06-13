@@ -3,6 +3,7 @@ package base;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.DriverManager;
 
 import java.time.Duration;
 
@@ -11,8 +12,8 @@ public abstract class BasePage {
     protected WebDriver driver;
     private final WebDriverWait wait;
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+    public BasePage() {
+        this.driver =  DriverManager.getDriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -26,8 +27,8 @@ public abstract class BasePage {
 
     protected boolean isDisplayed(By locator) {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
-        } catch (TimeoutException e) {
+            return driver.findElement(locator).isDisplayed();
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
     }

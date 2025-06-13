@@ -12,8 +12,8 @@ public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public static WebDriver initDriver() {
-        String browser = ConfigReader.getBrowser();
+    public static WebDriver initDriver(String browser) {
+//        String browser = ConfigReader.getBrowser();
         String runMode = ConfigReader.getRunMode();
         try {
             switch (browser.toLowerCase()) {

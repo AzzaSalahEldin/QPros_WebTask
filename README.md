@@ -4,12 +4,12 @@
 - Verifies e-commerce book purchase workflow
 - Parallel test execution in Chrome and Firefox
 - Scalable, maintainable framework (Page Object Model)
-- Detailed reporting
+- Detailed reporting and screenshots
 - Optional Dockerized test execution
 
 ## Setup Steps
 1. Clone the repo
-2. Install dependencies: `mvn clean install`
+2. Install dependencies: `mvn clean install` or `mvn test`
 3. (Optional) Start Docker Grid: `docker-compose up -d`
 
 ## Run Tests
@@ -17,4 +17,4 @@
 - Docker: Configure RemoteWebDriver and run using the Grid
 
 ## Reports
-- Available in `test-output/` or via Allure if configured
+- Available in `allure-report` 

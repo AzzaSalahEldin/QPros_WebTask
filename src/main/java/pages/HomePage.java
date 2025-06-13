@@ -20,8 +20,8 @@ public class HomePage extends BasePage {
         return By.xpath("//h3[text()='" + name + "']/ancestor::li//a[text()='Add to basket']");
     }
 
-    public HomePage(WebDriver driver) {
-        super(driver);
+    public HomePage() {
+        super();
     }
 
     public boolean isBookDisplayed(String name) {

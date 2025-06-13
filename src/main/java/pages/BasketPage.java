@@ -2,7 +2,6 @@ package pages;
 
 import base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public class BasketPage extends BasePage {
     private By productPrice = By.cssSelector(".product-price");
     private By productQuantityInput = By.cssSelector(".product-quantity input");
     private By proceedToCheckoutButton = By.cssSelector(".checkout-button");
-    public BasketPage(WebDriver driver) {
-        super(driver);
+    public BasketPage() {
+        super();
     }
     public boolean isOnCartPage() {
         return driver.getCurrentUrl().contains("basket");
